@@ -1,0 +1,7 @@
+# For indobenchmark-toolkit
+transformers==4.40.2
+sentencepiece==0.2.0
+datasets==2.19.1
+torch==2.3.0+cu121
+
+# Also install ipykernel if you want to use notebook.

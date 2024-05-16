@@ -1,0 +1,5 @@
+{
+    "python.analysis.extraPaths": [
+        "./indobenchmark-toolkit/src"
+    ]
+}
