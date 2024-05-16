@@ -1,11 +1,8 @@
 import sys
 sys.path.append("indobenchmark-toolkit/src")
 
-import os
-os.environ["HF_HOME"] = "./hf_cache"
-
 from indobenchmark import IndoNLGTokenizer
-from transformers import GPT2LMHeadModel, BatchEncoding
+from transformers import BatchEncoding
 
 class IndoNLGTokenizerForChat(IndoNLGTokenizer):
     def __init__(self, **kwargs):
@@ -85,21 +82,23 @@ class IndoNLGTokenizerForChat(IndoNLGTokenizer):
             input_ids[i].insert(0, inserted_token_id)
             attention_mask[i].insert(0, 1)
     
-    
+if __name__ == "__main__":
+    import os
+    os.environ["HF_HOME"] = "./hf_cache"
 
-tokenizer: IndoNLGTokenizerForChat = IndoNLGTokenizerForChat.from_pretrained("indobenchmark/indogpt")
-inputs = tokenizer.prepare_inputs_for_training(
-    instructions=[
-        "kamu adalah asisten yang dapat menjawab pertanyaan pengguna layaknya menjelaskan kepada orang yang berusia lima tahun.",
-        "kamu adalah asisten yang berguna.",
-    ],
-    user_chats=[
-        "dalam sepak bola apa gunanya menyia-nyiakan dua permainan pertama dengan terburu-buru - di tengah - bukan permainan terburu-buru biasa saya mendapatkannya",
-        "halo",
-    ],
-    assistant_chats=[
-        "jaga pertahanan tetap jujur, rasakan operan terburu-buru, buka permainan yang lewat. pelanggaran yang terlalu satu dimensi akan gagal. dan mereka yang bergegas ke tengah kadang-kadang dapat dibuka lebar-lebar untuk ukuran yard yang besar",
-        "hai",
-    ]
-)
-print(tokenizer.batch_decode(inputs["input_ids"]))
+    tokenizer: IndoNLGTokenizerForChat = IndoNLGTokenizerForChat.from_pretrained("indobenchmark/indogpt")
+    inputs = tokenizer.prepare_inputs_for_training(
+        instructions=[
+            "kamu adalah asisten yang dapat menjawab pertanyaan pengguna layaknya menjelaskan kepada orang yang berusia lima tahun.",
+            "kamu adalah asisten yang berguna.",
+        ],
+        user_chats=[
+            "dalam sepak bola apa gunanya menyia-nyiakan dua permainan pertama dengan terburu-buru - di tengah - bukan permainan terburu-buru biasa saya mendapatkannya",
+            "halo",
+        ],
+        assistant_chats=[
+            "jaga pertahanan tetap jujur, rasakan operan terburu-buru, buka permainan yang lewat. pelanggaran yang terlalu satu dimensi akan gagal. dan mereka yang bergegas ke tengah kadang-kadang dapat dibuka lebar-lebar untuk ukuran yard yang besar",
+            "hai",
+        ]
+    )
+    print(tokenizer.batch_decode(inputs["input_ids"]))
