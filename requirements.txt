@@ -3,5 +3,6 @@ transformers==4.40.2
 sentencepiece==0.2.0
 datasets==2.19.1
 torch==2.3.0+cu121
+accelerate==0.30.1
 
-# Also install ipykernel if you want to use notebook.
+# Also install ipykernel and ipywidgets if you want to use notebook.

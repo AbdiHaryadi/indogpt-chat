@@ -1,3 +1,5 @@
 venv/*
 hf_cache
 dataset/*
+__pycache__/*
+models/*
